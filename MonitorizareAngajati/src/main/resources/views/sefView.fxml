@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AngajatView">
+   <children>
+      <TableView fx:id="tableViewAngajati" layoutX="32.0" layoutY="56.0" prefHeight="273.0" prefWidth="231.0">
+        <columns>
+          <TableColumn fx:id="tableColumnAngajat" prefWidth="132.0" text="Angajat" />
+          <TableColumn minWidth="0.0" prefWidth="98.0" text="Login Time" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableViewCereri" layoutX="381.0" layoutY="56.0" prefHeight="273.0" prefWidth="250.0">
+        <columns>
+          <TableColumn fx:id="tableColumnSarcina" prefWidth="153.0" text="Sarcina" />
+          <TableColumn fx:id="tableColumnNewDeadline" prefWidth="96.0" text="Deadline Nou" />
+        </columns>
+      </TableView>
+      <Button fx:id="buttonTrimite" layoutX="100.0" layoutY="347.0" mnemonicParsing="false" text="Trimite Sarcina" />
+      <Button fx:id="buttonAccepta" layoutX="437.0" layoutY="347.0" mnemonicParsing="false" text="Accepta" />
+      <Button fx:id="buttonRespinge" layoutX="516.0" layoutY="347.0" mnemonicParsing="false" text="Respinge" />
+      <Button fx:id="buttonLogout" layoutX="32.0" layoutY="21.0" mnemonicParsing="false" text="Logout" />
+   </children>
+</AnchorPane>
