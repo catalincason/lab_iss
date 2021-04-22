@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.NewSarcinaView">
+   <children>
+      <GridPane layoutX="148.0" layoutY="97.0" prefHeight="129.0" prefWidth="307.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="79.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="193.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="textFieldSarcina" maxWidth="212.0" prefHeight="25.0" prefWidth="212.0" GridPane.columnIndex="1" />
+            <DatePicker fx:id="datePickerDeadline" prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Sarcina">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label text="Deadline" GridPane.rowIndex="1">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <Button fx:id="buttonTrimite" layoutX="258.0" layoutY="280.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Trimite" />
+   </children>
 </AnchorPane>
