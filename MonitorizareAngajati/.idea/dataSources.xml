@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Monitorizare.db" uuid="50625aff-1c74-4533-9138-06f354237cc6">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:E:\OneDrive - Universitatea Babes-Bolyai\Anul 2\Semestrul 2\ISS\Laborator\lab_iss\MonitorizareAngajati\Monitorizare.db</jdbc-url>
+    </data-source>
+  </component>
+</project>
