@@ -1,19 +1,40 @@
-package model;
+package domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
-public class Cerere extends Entity<Integer> {
+@javax.persistence.Entity
+@Table(name = "Cereri")
+public class Cerere extends Entity {
     private int id;
-    private LocalDate deadline;
+    private Sarcina sarcina;
+    private Date deadline;
     private Status status;
 
     public Cerere() {
     }
 
-    public Cerere(LocalDate deadline) {
+    public Cerere(Sarcina sarcina, Date deadline) {
+        this.sarcina = sarcina;
         this.deadline = deadline;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sarcina")
+    public Sarcina getSarcina() {
+        return sarcina;
+    }
+
+    public void setSarcina(Sarcina sarcina) {
+        this.sarcina = sarcina;
+    }
+
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     public int getId() {
         return id;
     }
@@ -22,14 +43,17 @@ public class Cerere extends Entity<Integer> {
         this.id = id;
     }
 
-    public LocalDate getDeadline() {
+    @Temporal(TemporalType.DATE)
+    @Column(name = "deadline")
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
+    @Column(name = "status")
     public Status getStatus() {
         return status;
     }

@@ -1,13 +1,12 @@
-package nerworking.rpc;
+package networking.rpc;
 
-import DTO.CazDTO;
-import domain.Caz;
-import domain.Donatie;
-import domain.Donator;
+import domain.Cerere;
+import domain.Sarcina;
 import domain.User;
+import domain.UserDTO;
 import networking.LoginFailedExeption;
-import networking.Observer;
 import networking.Services;
+import networking.Observer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,9 +14,7 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ClientReflectionWorker implements Runnable, Observer {
     private Services server;
@@ -74,12 +71,6 @@ public class ClientReflectionWorker implements Runnable, Observer {
         }
     }
 
-    @Override
-    public void addedDonation(Donatie donatie) {
-        Response response = new Response.Builder().type(ResponseType.ADDED_DONATION).data(donatie).build();
-        sendResponse(response);
-    }
-
     private Response handleRequest(Request request) {
         Response response=null;
         String handlerName="handle"+(request).type();
@@ -111,20 +102,6 @@ public class ClientReflectionWorker implements Runnable, Observer {
         }
     }
 
-    private Response handleGET_CAZURI(Request request) {
-        Map<Caz, Integer> map = server.getSumaCazuri();
-        List<CazDTO> cazDTOList = new ArrayList<>();
-        map.forEach((caz, suma) -> cazDTOList.add(new CazDTO(caz, suma)));
-        CazDTO[] cazDTOS = cazDTOList.toArray(new CazDTO[cazDTOList.size()]);
-        return new Response.Builder().type(ResponseType.GET_CAZURI).data(cazDTOS).build();
-    }
-
-    private Response handleDONATE(Request request) {
-        Donatie donatie = (Donatie)request.data();
-        server.addDonatie(donatie);
-        return okResponse;
-    }
-
     private Response handleLOGOUT(Request request) {
         User user = (User)request.data();
         server.logout(user, this);
@@ -132,11 +109,37 @@ public class ClientReflectionWorker implements Runnable, Observer {
         return okResponse;
     }
 
-    private Response handleFIND_NUME(Request request) {
-        String nume = (String)request.data();
-        List<Donator> donatorList = server.findByNume(nume);
-        Donator[] donatori = donatorList.toArray(new Donator[donatorList.size()]);
-        return new Response.Builder().type(ResponseType.FIND_NUME).data(donatori).build();
+    private Response handleSEND_SARCINA(Request request) {
+        Sarcina sarcina = (Sarcina)request.data();
+        server.sendSarcina(sarcina);
+        return okResponse;
+    }
+
+    private Response handleGET_SARCINI(Request request) {
+        List<Sarcina> sarcini = server.getSarcini((User)request.data());
+        Sarcina[] sarcinas = sarcini.toArray(new Sarcina[0]);
+        return new Response.Builder().type(ResponseType.GET_SARCINI).data(sarcinas).build();
+    }
+
+    private Response handleDELETE_SARCINA(Request request) {
+        server.deleteSarcina((Sarcina)request.data());
+        return okResponse;
+    }
+
+    private Response handleSEND_CERERE(Request request) {
+        server.sendCerere((Cerere)request.data());
+        return okResponse;
+    }
+
+    private Response handleGET_CERERI(Request request) {
+        List<Cerere> cerereList = server.getCereri();
+        Cerere[] cereri = cerereList.toArray(new Cerere[0]);
+        return new Response.Builder().type(ResponseType.GET_CERERI).data(cereri).build();
+    }
+
+    private Response handleUPDATE_CERERE(Request request) {
+        server.updateCerere((Cerere)request.data());
+        return okResponse;
     }
 
     private void sendResponse(Response response) {
@@ -148,5 +151,35 @@ public class ClientReflectionWorker implements Runnable, Observer {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void userLoggedIn(UserDTO user) {
+        Response response = new Response.Builder().type(ResponseType.USER_LOGGED_IN).data(user).build();
+        sendResponse(response);
+    }
+
+    @Override
+    public void userLoggedOut(UserDTO user) {
+        Response response = new Response.Builder().type(ResponseType.USER_LOGGED_OUT).data(user).build();
+        sendResponse(response);
+    }
+
+    @Override
+    public void sarcinaSent(Sarcina sarcina) {
+        Response response = new Response.Builder().type(ResponseType.SARCINA_SENT).data(sarcina).build();
+        sendResponse(response);
+    }
+
+    @Override
+    public void cerereSent(Cerere cerere) {
+        Response response = new Response.Builder().type(ResponseType.CERERE_SENT).data(cerere).build();
+        sendResponse(response);
+    }
+
+    @Override
+    public void cerereUpdated(Cerere cerere) {
+        Response response = new Response.Builder().type(ResponseType.CERERE_UPDATED).data(cerere).build();
+        sendResponse(response);
     }
 }

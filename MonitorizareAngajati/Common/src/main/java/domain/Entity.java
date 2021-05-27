@@ -1,6 +1,6 @@
-package model;
+package domain;
 
 import java.io.Serializable;
 
-public class Entity<ID> implements Serializable {
+public class Entity implements Serializable {
 }

@@ -1,7 +1,7 @@
-package server;
+package networking.server;
 
-import networking.rpc.ClientReflectionWorker;
 import networking.Services;
+import networking.rpc.ClientReflectionWorker;
 
 import java.net.Socket;
 

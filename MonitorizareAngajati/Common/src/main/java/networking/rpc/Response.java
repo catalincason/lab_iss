@@ -1,4 +1,4 @@
-package nerworking.rpc;
+package networking.rpc;
 
 import java.io.Serializable;
 

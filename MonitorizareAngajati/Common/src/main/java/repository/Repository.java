@@ -1,6 +1,8 @@
-package repo;
+package repository;
 
 import domain.Entity;
+
+import java.util.List;
 
 public interface Repository<ID, E extends Entity> {
     E add(E entity);
@@ -9,7 +11,7 @@ public interface Repository<ID, E extends Entity> {
 
     E get(ID id);
 
-    Iterable<E> getAll();
+    List<E> getAll();
 
-    void update(ID id);
+    void update(E entity);
 }

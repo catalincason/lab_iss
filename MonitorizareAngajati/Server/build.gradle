@@ -1,4 +1,5 @@
 plugins {
+    id 'application'
     id 'java'
 }
 
@@ -9,6 +10,14 @@ repositories {
     mavenCentral()
 }
 
+mainClassName = 'StartServer'
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    runtime group: 'org.xerial', name: 'sqlite-jdbc', version: '3.34.0'
+
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+
+    compile project (':Common')
 }

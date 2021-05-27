@@ -1,2 +1,6 @@
 rootProject.name = 'MonitorizareAngajati'
+include 'Client'
+include 'Server'
+include 'Common'
+include 'Common'
 
